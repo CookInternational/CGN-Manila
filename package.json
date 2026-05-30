@@ -1,0 +1,9 @@
+{
+  "name": "cgn-manila",
+  "version": "1.0.0-alpha",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-manila-pages.mjs"
+  }
+}
