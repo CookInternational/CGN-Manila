@@ -479,16 +479,44 @@
     if(kind==='bureaus'){renderReporterCards();}
   }
 function renderReporterCards(){
-  const el=document.getElementById('manila-reporters');
+  const el = document.getElementById('manila-reporters');
   if(!el) return;
-  el.innerHTML = `
-    <article class="reporter-card">
-      <h3>Isabel Reyes</h3>
-      <p><strong>Manila Bureau Chief</strong></p>
-      <p>Isabel Reyes leads CGN Manila bureau coverage for Manila, the Philippines, Southeast Asia and the world.</p>
-      <p><a href="mailto:isabel.reyes@cgnnews.net">isabel.reyes@cgnnews.net</a></p>
-    </article>
-  `;
+
+  function fixReporter(r){
+    r = r || {};
+    const fixed = Object.assign({}, r);
+
+    if(String(fixed.name || '').trim().toLowerCase() === 'gabriel santos'){
+      fixed.name = 'Isabel Reyes';
+      fixed.title = 'Manila Bureau Chief';
+      fixed.email = 'tips@cgnnews.net';
+      fixed.beats = 'Manila, the Philippines, Southeast Asia, maritime security, democratic institutions, diplomacy, climate risk, consumer pressure, and Indo-Pacific business corridors.';
+    }
+
+    return fixed;
+  }
+
+  apiGet({action:'manila_reporters'})
+    .then(data => {
+      const reps = (data.reporters || []).map(fixReporter);
+
+      if(!reps.length){
+        el.innerHTML = '<p class="small-note">Reporter list loading.</p>';
+        return;
+      }
+
+      el.innerHTML = reps.map(r => `
+        <article class="reporter-card">
+          <h3>${esc(r.name)}</h3>
+          <p><strong>${esc(r.title)}</strong></p>
+          <p>${esc(r.beats || '')}</p>
+          <p><a href="mailto:${esc(r.email || 'tips@cgnnews.net')}">${esc(r.email || 'tips@cgnnews.net')}</a></p>
+        </article>
+      `).join('');
+    })
+    .catch(e => {
+      el.innerHTML = '<p class="small-note">Reporter list loading.</p>';
+    });
 }
   async function renderPaymentSuccess(){
     const main=document.getElementById('main'); if(!main) return; configureHead(null); main.innerHTML=`<section class="page-card"><h1>Confirming Subscription</h1><p id="payment-message">Checking your CGN Manila account…</p><p><a class="btn alt" href="/${getLang()}/account/">View Account</a> <a class="btn gold" href="/${getLang()}/">Return Home</a></p></section>`;
