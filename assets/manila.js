@@ -478,10 +478,18 @@
     if(kind==='news'){fetchArticles(150).then(arts=>{const el=document.getElementById('news-list'); if(el)el.innerHTML=arts.length?arts.map(renderArticleCard).join(''):`<div class="empty-state">${esc(i.noStories)}</div>`;}).catch(e=>{const el=document.getElementById('news-list'); if(el)el.innerHTML=`<div class="empty-state">${esc(e.message)}</div>`;});}
     if(kind==='bureaus'){renderReporterCards();}
   }
-  function renderReporterCards(){
-    const el=document.getElementById('manila-reporters'); if(!el) return;
-    apiGet({action:'manila_reporters'}).then(data=>{ const reps=data.reporters||[]; el.innerHTML=reps.map(r=>`<article class="reporter-card"><h3>${esc(r.name)}</h3><p><strong>${esc(r.title)}</strong></p><p>${esc(r.beats)}</p><p><a href="mailto:${esc(r.email)}">${esc(r.email)}</a></p></article>`).join(''); }).catch(e=>{ el.innerHTML='<p class="small-note">Reporter list loading.</p>'; });
-  }
+function renderReporterCards(){
+  const el=document.getElementById('manila-reporters');
+  if(!el) return;
+  el.innerHTML = `
+    <article class="reporter-card">
+      <h3>Isabel Reyes</h3>
+      <p><strong>Manila Bureau Chief</strong></p>
+      <p>Isabel Reyes leads CGN Manila bureau coverage for Manila, the Philippines, Southeast Asia and the world.</p>
+      <p><a href="mailto:isabel.reyes@cgnnews.net">isabel.reyes@cgnnews.net</a></p>
+    </article>
+  `;
+}
   async function renderPaymentSuccess(){
     const main=document.getElementById('main'); if(!main) return; configureHead(null); main.innerHTML=`<section class="page-card"><h1>Confirming Subscription</h1><p id="payment-message">Checking your CGN Manila account…</p><p><a class="btn alt" href="/${getLang()}/account/">View Account</a> <a class="btn gold" href="/${getLang()}/">Return Home</a></p></section>`;
     const msg=document.getElementById('payment-message'); const uid=getUser();
