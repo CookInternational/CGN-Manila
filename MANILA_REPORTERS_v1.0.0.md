@@ -6,14 +6,14 @@ Currency: `PHP`
 
 > These are CGN bureau reporter personas for site bylines and newsroom assignment logic. They are publication roles, not claims about real people.
 
-## Gabriel Santos
-- Slug: `gabriel-santos`
+## Isabel Reyes
+- Slug: `isabel-reyes`
 - Title: Bureau Chief
 - Beats: General bureau leadership, major stories, editorial coordination
-- Email: manila@cgnnews.net
-- Bio: Gabriel Santos covers general bureau leadership, major stories, editorial coordination for CGN Manila.
+- Email: isabel.reyes@cgnnews.net
+- Bio: Isabel Reyes is a CGN News Foreign Correspondent stationed in Manila, covering the Philippines, Southeast Asia, maritime security, democratic institutions, regional diplomacy, climate risk, consumer pressure and the business corridors linking Manila to Japan, the United States and the wider Indo-Pacific. Her reporting focuses on how politics, sea-lane security, infrastructure, energy costs and typhoon resilience shape daily life across the archipelago and the region.
 - Default categories: World, Local, Special Reports
-- AI-generated article assignment allowed: FALSE
+- AI-generated article assignment allowed: TRUE
 
 ## Maya Reyes
 - Slug: `maya-reyes`
