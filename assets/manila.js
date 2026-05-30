@@ -482,15 +482,41 @@ function renderReporterCards(){
   const el = document.getElementById('manila-reporters');
   if(!el) return;
 
-  function fixReporter(r){
-    r = r || {};
-    const fixed = Object.assign({}, r);
+  const ISABEL_BIO = 'Isabel Reyes is a CGN News Foreign Correspondent stationed in Manila, covering the Philippines, Southeast Asia, maritime security, democratic institutions, regional diplomacy, climate risk, consumer pressure and the business corridors linking Manila to Japan, the United States and the wider Indo-Pacific. Her reporting focuses on how politics, sea-lane security, infrastructure, energy costs and typhoon resilience shape daily life across the archipelago and the region.';
 
-    if(String(fixed.name || '').trim().toLowerCase() === 'gabriel santos'){
+  function cleanEmail(email){
+    const value = String(email || '').trim();
+
+    if(
+      value.includes('@manila.') ||
+      value.includes('@manilla.') ||
+      value.includes('.manila') ||
+      value.includes('.manilla')
+    ){
+      return 'tips@cgnnews.net';
+    }
+
+    return value || 'tips@cgnnews.net';
+  }
+
+  function fixReporter(r){
+    const fixed = Object.assign({}, r || {});
+    const name = String(fixed.name || '').trim().toLowerCase();
+    const email = String(fixed.email || '').trim().toLowerCase();
+
+    if(
+      name === 'gabriel santos' ||
+      name === 'isabel reyes' ||
+      email.includes('gabriel') ||
+      email.includes('isabel.reyes')
+    ){
       fixed.name = 'Isabel Reyes';
-      fixed.title = 'Manila Bureau Chief';
-      fixed.email = 'tips@cgnnews.net';
-      fixed.beats = 'Manila, the Philippines, Southeast Asia, maritime security, democratic institutions, diplomacy, climate risk, consumer pressure, and Indo-Pacific business corridors.';
+      fixed.title = 'Foreign Correspondent — Manila';
+      fixed.email = 'isabel.reyes@cgnnews.net';
+      fixed.beats = ISABEL_BIO;
+      fixed.bio = ISABEL_BIO;
+    } else {
+      fixed.email = cleanEmail(fixed.email);
     }
 
     return fixed;
@@ -508,8 +534,8 @@ function renderReporterCards(){
       el.innerHTML = reps.map(r => `
         <article class="reporter-card">
           <h3>${esc(r.name)}</h3>
-          <p><strong>${esc(r.title)}</strong></p>
-          <p>${esc(r.beats || '')}</p>
+          <p><strong>${esc(r.title || '')}</strong></p>
+          <p>${esc(r.bio || r.beats || '')}</p>
           <p><a href="mailto:${esc(r.email || 'tips@cgnnews.net')}">${esc(r.email || 'tips@cgnnews.net')}</a></p>
         </article>
       `).join('');
