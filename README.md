@@ -17,6 +17,6 @@ Metrobank Center
 35th Street  
 Suite 909  
 Manila, Philippines  
-Email: tips@cgnnews.net
+Email: isabel.reyes@cgnnews.net
 
 GitHub Pages workflow is added manually later.
