@@ -511,7 +511,7 @@ function renderReporterCards(){
       email.includes('isabel.reyes')
     ){
       fixed.name = 'Isabel Reyes';
-      fixed.title = 'Foreign Correspondent — Manila';
+      fixed.title = 'Bureau Chief';
       fixed.email = 'isabel.reyes@cgnnews.net';
       fixed.beats = ISABEL_BIO;
       fixed.bio = ISABEL_BIO;
