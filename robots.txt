@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://manila.cgnnews.net/sitemap.xml
