@@ -1,7 +1,7 @@
 (function(){
 
-  // CGN Shell v8.3.3-Alpha
-  // 15 May 2026 • account modal safety fix
+  // CGN Manila Shell v8.3.4-Alpha
+  // 25 June 2026 • iOS app header icon update
   // Developed by Cook Technology Services
   // Site-wide backend configuration.
   // Store the deployed Apps Script Web App URL in Admin Column K as:
@@ -764,6 +764,16 @@ function getShellLoginInput_(id){
     return path !== "/editor";
   }
 
+
+  function mobileAppIconHtml(){
+    return `
+      <a href="https://www.cgnnews.net/ios/" class="cgn-ios-app-link" aria-label="Get the CGN NOW mobile app">
+        <span class="cgn-ios-phone" aria-hidden="true"><span class="cgn-ios-word">iOS</span></span>
+        <span class="cgn-ios-text">CGN NOW</span>
+      </a>
+    `;
+  }
+
   function editorPenHtml(){
     if(!shouldShowEditorPen()) return "";
     return `
@@ -876,6 +886,8 @@ function getShellLoginInput_(id){
               <path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.376.505A3.016 3.016 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.376-.505a3.016 3.016 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.75 15.568V8.432L15.818 12 9.75 15.568z"/>
             </svg>
           </a>
+
+          ${mobileAppIconHtml()}
 
           ${editorPenHtml()}
 
@@ -1339,6 +1351,78 @@ function getShellLoginInput_(id){
       }
 
       .social-icon:hover { opacity:.65; }
+
+      .cgn-ios-app-link {
+        width:24px;
+        height:28px;
+        display:inline-flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        color:#111;
+        text-decoration:none;
+        line-height:1;
+        flex:0 0 auto;
+        transition:opacity .2s ease;
+      }
+
+      .cgn-ios-app-link:hover {
+        opacity:.72;
+        text-decoration:none;
+      }
+
+      .cgn-ios-phone {
+        width:15px;
+        height:22px;
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        box-sizing:border-box;
+        border:2px solid #111;
+        border-radius:4px;
+        background:#fff;
+        position:relative;
+      }
+
+      .cgn-ios-phone::before {
+        content:"";
+        position:absolute;
+        top:2px;
+        left:50%;
+        width:5px;
+        height:1px;
+        transform:translateX(-50%);
+        background:#111;
+        border-radius:999px;
+      }
+
+      .cgn-ios-phone::after {
+        content:"";
+        position:absolute;
+        bottom:2px;
+        left:50%;
+        width:3px;
+        height:3px;
+        transform:translateX(-50%);
+        background:#111;
+        border-radius:999px;
+      }
+
+      .cgn-ios-word {
+        display:block;
+        color:#111;
+        font-family:Arial Black, Arial, Helvetica, sans-serif;
+        font-size:5px;
+        font-weight:900;
+        line-height:1;
+        letter-spacing:-.03em;
+        margin-top:1px;
+      }
+
+      .cgn-ios-text {
+        display:none;
+      }
+
 
       .editor-portal-link {
         width:22px;
@@ -2127,6 +2211,7 @@ function getShellLoginInput_(id){
         .right-tools > a[aria-label="CGN News on Instagram"],
         .right-tools > a[aria-label="CGN News on X"],
         .right-tools > a[aria-label="CGN News on YouTube"],
+        .right-tools > a.cgn-ios-app-link,
         .right-tools > a.editor-portal-link {
           flex:1 1 0;
           min-width:0;
@@ -2156,6 +2241,23 @@ function getShellLoginInput_(id){
           justify-content:center;
           line-height:1;
           letter-spacing:-.01em;
+        }
+
+
+        .cgn-ios-app-link {
+          order:3;
+          flex:1 1 0;
+          min-width:0;
+          min-height:32px;
+          margin:0;
+          display:inline-flex;
+          align-items:center;
+          justify-content:center;
+        }
+
+        .cgn-ios-phone {
+          width:16px;
+          height:24px;
         }
 
         .editor-portal-link {
